@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zyh.dao.UserDao">
+    <insert id="create" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        insert into user(username,password,telephone) values(#{username},#{password},#{telephone});
+    </insert>
+
+    <resultMap id="BaseResultMap" type="com.zyh.entities.User">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="telephone" property="telephone" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="findById" parameterType="int" resultMap="BaseResultMap">
+        select id,username,password,telephone from user where id=#{id};
+    </select>
+    <update id="update">
+        update user set username = #{username},password = #{password}, telephone = #{telephone} where id=#{id}
+    </update>
+    <delete id="delete">
+        delete from user where id=#{id}
+    </delete>
+
+</mapper>

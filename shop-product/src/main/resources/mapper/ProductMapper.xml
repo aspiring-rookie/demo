@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zyh.dao.ProductDao">
+    <insert id="create" parameterType="Product" useGeneratedKeys="true" keyProperty="pid">
+        insert into product(pname,pprice,stook) values(#{pname},#{pprice},#{stook});
+    </insert>
+
+    <resultMap id="BaseResultMap" type="com.zyh.entities.Product">
+        <id column="pid" property="pid" jdbcType="INTEGER"/>
+        <result column="pname" property="pname" jdbcType="VARCHAR"/>
+        <result column="pprice" property="pprice" jdbcType="DOUBLE"/>
+        <result column="stook" property="stook" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="getProductById" parameterType="int" resultMap="BaseResultMap">
+        select pid,pname,pprice,stook from product where pid=#{pid};
+    </select>
+</mapper>
